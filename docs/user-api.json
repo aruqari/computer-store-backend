@@ -1,0 +1,303 @@
+{
+
+  "openapi": "3.0.3",
+  "info":{
+    "title": "User API",
+  "version": "1.0.0"
+},
+"servers":[ 
+  {
+    "url": "http://127.0.0.1:8000"
+  }
+],
+"paths":{
+  "/api/users":{
+    "post":{
+      "description": "Register akun baru",
+      "requestBody":{
+        "content": {
+          "application/json":{
+            "examples":{
+              "abdul":{
+                "description":"Register user abdul",
+                "value":{             
+                  "id_user":"usr1",
+                  "id_pelangan":"plg1",
+                  "role":"pelanggan",
+                  "username":"abdulaziz"
+                }
+              }
+            },
+            "schema":{
+              "type": "object",
+              "required": ["id_user", "role", "username", "password"],
+              "properties": {
+                "id_user":{
+                  "type": "string"
+                },
+                "id_pelanggan":{
+                  "type": "string"
+                },
+                "role":{
+                  "type": "string"
+                },
+                "username":{
+                  "type": "string"
+                },
+                "password":{
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201":{
+        "description":"Sukses register akun baru",
+          "content": {
+            "application/json":{
+              "examples":{
+                "success":{
+                  "description":"Sukses register user",
+                  "value":{
+                    "data":{             
+                      "id_user":"usr1",
+                      "id_pelangan":"plg1",
+                      "role":"pelanggan",
+                      "username":"abdulaziz"
+                    }
+                  }
+                }
+              },
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "data":{
+                    "type":"object",
+                    "properties":{
+                        "id_user":{
+                          "type": "string"
+                      },
+                      "id_pelanggan":{
+                        "type": "string"
+                      },
+                      "role":{
+                        "type": "string"
+                      },
+                      "username":{
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "errors":{
+                    "type":"object"
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  },
+  "/api/users/login":{
+    "post":{
+      "description": "Login",
+      "requestBody":{
+        "content": {
+          "application/json":{
+            "schema":{
+              "type": "object",
+              "required": ["username", "password"],
+              "properties": {
+                "username":{
+                  "type": "string"
+                },
+                "password":{
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200":{
+          "description": "Login berhasil",
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "data":{
+                    "type":"object",
+                    "properties":{
+                        "id_user":{
+                          "type": "string"
+                      },
+                      "id_pelanggan":{
+                        "type": "string"
+                      },
+                      "role":{
+                        "type": "string"
+                      },
+                      "username":{
+                        "type": "string"
+                      },
+                      "token":{
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "errors":{
+                    "type":"object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/users/current":{
+    "get":{
+      "description": "Get current user",
+      "parameters": [
+        {
+          "name": "Authorization",
+          "in": "header"
+        }
+      ],
+      "responses": {
+        "200":{
+          "description": "Success get current user",
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "data":{
+                    "type":"object",
+                    "properties":{
+                        "id_user":{
+                          "type": "string"
+                      },
+                      "id_pelanggan":{
+                        "type": "string"
+                      },
+                      "role":{
+                        "type": "string"
+                      },
+                      "username":{
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "errors":{
+                    "type":"object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "patch":{
+      "description": "Update current user",
+      "parameters": [
+        {
+          "name": "Authorization",
+          "in": "header"
+        }
+      ],
+      "requestBody":{
+        "description": "Update current user",
+        "content": {
+          "application/json":{
+            "schema":{
+              "type": "object",
+              "properties": {
+                "username":{
+                  "type": "string"
+                },
+                "password":{
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200":{
+          "description": "Success get update user",
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "data":{
+                    "type":"object",
+                    "properties":{
+                        "id_user":{
+                          "type": "string"
+                      },
+                      "id_pelanggan":{
+                        "type": "string"
+                      },
+                      "role":{
+                        "type": "string"
+                      },
+                      "username":{
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "errors":{
+                    "type":"object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/api/users/logout":{
+    "delete":{
+      "description": "Logout current user",
+      "parameters": [
+        {
+          "name": "Authorization",
+          "in": "header"
+        }
+      ],
+      "responses": {
+        "200":{
+          "description": "Success get update user",
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "data":{
+                    "type":"boolean"
+                  },
+                  "errors":{
+                    "type":"object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+}
